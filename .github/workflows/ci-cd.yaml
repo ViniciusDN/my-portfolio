@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: build
-          path: dist/my-portfolio/
+          path: dist/
           if-no-files-found: error
   deploy:
     runs-on: ubuntu-latest
@@ -39,7 +39,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: build
-          path: dist/my-portfolio/
+          path: dist/
 
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v2
@@ -50,4 +50,4 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync ./dist/my-portfolio s3://portfolio-vinicius/
+          aws s3 sync ./dist/ s3://portfolio-vinicius/
