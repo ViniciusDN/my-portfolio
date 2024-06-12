@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 
+
 @Component({
   selector: 'btn-primary',
   standalone: true,
@@ -9,4 +10,5 @@ import { Component, Input } from '@angular/core';
 })
 export class BtnPrimaryComponent {
   @Input('text') text: string = '';
+  @Input('link') link: string = '';
 }

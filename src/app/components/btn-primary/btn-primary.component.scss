@@ -10,4 +10,8 @@ button {
   background: -webkit-linear-gradient(180deg,#FF6196, #5222D0);
   padding: 12px 22px;
   cursor: pointer;
+
+  a {
+    text-decoration: none;
+  }
 }
