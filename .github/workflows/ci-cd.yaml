@@ -3,7 +3,6 @@ name: Build and Deploy to S3
 on:
   push:
     branches:
-      - main
       - master
 
 jobs:
@@ -19,17 +18,15 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Build Angular Project
-        run: npm run build
+      - name: Build Angular app to prod
+        working-directory: github-option-three-app
+        run: npm install && npm run build:prod
 
       - name: Save build
         uses: actions/upload-artifact@master
         with:
           name: build
-          path: dist/my-portfolio/
+          path: dist/
           if-no-files-found: error
   deploy:
     runs-on: ubuntu-latest
@@ -39,7 +36,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: build
-          path: dist/my-portfolio/
+          path: dist/
 
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v2
@@ -50,4 +47,4 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync ./dist/my-portfolio s3://portfolio-vinicius/
+          aws s3 sync ./dist/browser s3://portfolio-vinicius/
